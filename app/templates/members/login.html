@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+       <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{field.label}}</label>
+            {{ field }}
+        </div>
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <small class="form-text text-center text-danger font-weight-bold">{{ error }}</small>
+    {% endfor %}
+    <button class="btn btn-primary btn-block mt-4" type="submit">로그인</button>
+
+    <a href="https://kauth.kakao.com/oauth/authorize?client_id=d06b20d7910e3ca57b24865d10f8ad42&redirect_uri=http://localhost:8000/members/kakao-login/&response_type=code">
+        <img src="{%static 'images/kakao_login_btn.png' %}" alt="kakao login button">
+    </a>
+    <a href="https://www.facebook.com/v3.2/dialog/oauth?
+            client_id=315857049196642
+            &redirect_uri=http://localhost:8000/members/facebook-login/"
+       class="btn btn-lg btn-info btn-block">페이스북 로그인</a>
+    <a href="{% url "social:begin" "google-oauth2" %}">Google+ Login</a>
+</form>
+{% endblock %}

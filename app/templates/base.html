@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Normalize.css: 브라우저마다 다른 CSS기본 설정값들을 같게 맞춰줌 -->
+	<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <title>CGV</title>
+</head>
+<body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">CGV</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="{% url 'members:login' %}">Sign in</a>
+            <a class="nav-link" href="{% url 'members:signup' %}">Sign up</a>
+            <a class="nav-link" href="#">Book</a>
+          </nav>
+        </div>
+      </header>
+    </div>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

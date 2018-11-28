@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+    <li class="nav-item">
+					<form action="{% url 'members:logout' %}"
+					      method="POST">
+						{% csrf_token %}
+                        <button type="submit">logout</button>
+					</form>
+    {% endif %}
+    <main role="main" class="inner cover">
+        <h1 class="cover-heading">Cover Movie or Event Page</h1>
+        <p class="lead">영화/이벤트 소개란</p>
+    </main>
+{% endblock %}
