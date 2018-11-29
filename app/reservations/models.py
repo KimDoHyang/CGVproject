@@ -11,13 +11,14 @@ User = get_user_model()
 class Movie(models.Model):
     # 타이틀
     title = models.CharField(
-        max_length=50, unique=True,
+        max_length=50,
+        unique=True,
         error_messages={
             'unique': "The Movie with that title already exists.",
         },
     )
     # 감독
-    director = models.CharField(max_length=30)
+    director = models.CharField(max_length=30, blank=True, null=True)
 
     # 출연배우(cast) 관련 수정 가능 사항
     # 만약 배우를 새로운 object로 만들어 해당 배우 정보 및 출연작 정보를
@@ -30,18 +31,25 @@ class Movie(models.Model):
     # 2) PostgreSQL을 사용하는 경우, 이들 library에서 ArrayField를 import하는 방법이 있다.
 
     # 출연 배우
-    cast = models.CharField(max_length=150)
-    # 상영시간
-    duration_min = models.IntegerField()
+    cast = models.CharField(max_length=128,blank=True, null=True)
+    # 러닝타임
+    duration_min = models.IntegerField(blank=True, null=True)
     # 개봉일
-    opening_date = models.DateField()
+    opening_date = models.DateField(blank=True, null=True)
     # 영화 장르
-    genre = models.CharField(max_length=20)
+    genre = models.CharField(max_length=32, blank=True, null=True)
     # 영화 줄거리
-    description = models.TextField(max_length=200)
+    description = models.TextField(max_length=512, blank=True, null=True)
     # 트레일러
-    trailer = models.URLField(blank=True, null=True)
-
+    trailer = models.URLField(default='', blank=True, null=True)
+    # 예매율
+    reservation_score = models.FloatField(default=0, blank=True, null=True)
+    # 상영 여부
+    now_show = models.BooleanField(default=False, blank=True, null=True)
+    # 영화 메인 포스터
+    main_img = models.URLField(blank=True, null=True)
+    # 스틸컷
+    stillcut_img = models.CharField(max_length=512, blank=True, null=True)
 
 # 영화관(Theater) 객체 모델
 class Theater(models.Model):
